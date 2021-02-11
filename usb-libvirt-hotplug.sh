@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #
 # usb-libvirt-hotplug.sh
@@ -62,9 +62,9 @@ if [ -z "${ACTION}" ]; then
   echo "Missing udev ACTION environment variable." >&2
   exit 1
 fi
-if [ "${ACTION}" == 'add' ]; then
+if [[ "${ACTION}" == 'add' || "${ACTION}" == 'bind' ]]; then
   COMMAND='attach-device'
-elif [ "${ACTION}" == 'remove' ]; then
+elif [[ "${ACTION}" == 'remove' || "${ACTION}" == 'unbind' ]]; then
   COMMAND='detach-device'
 else
   echo "Invalid udev ACTION: ${ACTION}" >&2
